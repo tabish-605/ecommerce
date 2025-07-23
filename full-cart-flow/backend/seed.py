@@ -2,6 +2,7 @@ from utils.db import init_db, db
 from models.product import Product
 import os
 import datetime
+from datetime import datetime, UTC
  
 # Initialize database without app context
 init_db()
@@ -16,8 +17,8 @@ def seed_products():
             "category": "Electronics",
             "rating": 4.5,
             "stock": 50,
-            "created_at": datetime.datetime.utcnow(),
-            "updated_at": datetime.datetime.utcnow()
+            "created_at": datetime.now(UTC),
+            "updated_at": datetime.now(UTC)
         },
         {
             "name": "Cotton T-Shirt",
@@ -27,8 +28,8 @@ def seed_products():
             "category": "Clothing",
             "rating": 4.2,
             "stock": 100,
-            "created_at": datetime.datetime.utcnow(),
-            "updated_at": datetime.datetime.utcnow()
+            "created_at": datetime.now(UTC),
+            "updated_at": datetime.now(UTC)
         },
         {
             "name": "Coffee Maker",
@@ -38,8 +39,8 @@ def seed_products():
             "category": "Home",
             "rating": 4.7,
             "stock": 30,
-            "created_at": datetime.datetime.utcnow(),
-            "updated_at": datetime.datetime.utcnow()
+            "created_at": datetime.now(UTC),
+            "updated_at": datetime.now(UTC)
         },
         {
             "name": "JavaScript: The Good Parts",
@@ -49,8 +50,8 @@ def seed_products():
             "category": "Books",
             "rating": 4.8,
             "stock": 75,
-            "created_at": datetime.datetime.utcnow(),
-            "updated_at": datetime.datetime.utcnow()
+            "created_at": datetime.now(UTC),
+            "updated_at": datetime.now(UTC)
         },
         {
             "name": "Smart Watch",
@@ -60,8 +61,8 @@ def seed_products():
             "category": "Electronics",
             "rating": 4.6,
             "stock": 40,
-            "created_at": datetime.datetime.utcnow(),
-            "updated_at": datetime.datetime.utcnow()
+            "created_at": datetime.now(UTC),
+            "updated_at": datetime.now(UTC)
         }
     ]
     
