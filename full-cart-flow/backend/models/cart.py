@@ -1,11 +1,11 @@
-from utils.db import mongo
+from utils.db import db
 import datetime
 from .product import Product
  
 class Cart:
     @staticmethod
     def get_collection():
-        return mongo.db.carts
+        return db.carts
     
     @staticmethod
     def create_indexes():
