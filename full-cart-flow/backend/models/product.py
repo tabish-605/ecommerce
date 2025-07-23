@@ -1,10 +1,10 @@
-from utils.db import mongo
+from utils.db import db
 import datetime
  
 class Product:
     @staticmethod
     def get_collection():
-        return mongo.db.products
+        return db.products
     
     @staticmethod
     def create_indexes():
@@ -28,8 +28,21 @@ class Product:
     
     @staticmethod
     def find_all(filter_query=None):
-        return list(Product.get_collection().find(filter_query, {'_id': 0}))
+        # Return documents with ObjectId converted to string
+        products = list(Product.get_collection().find(filter_query))
+        for p in products:
+            p['_id'] = str(p['_id'])
+        return products
     
     @staticmethod
     def find_by_id(product_id):
-        return Product.get_collection().find_one({'id': product_id}, {'_id': 0})
+        from bson import ObjectId
+        try:
+            # Convert string ID to ObjectId
+            obj_id = ObjectId(product_id)
+            product = Product.get_collection().find_one({'_id': obj_id})
+            if product:
+                product['_id'] = str(product['_id'])
+            return product
+        except:
+            return None
