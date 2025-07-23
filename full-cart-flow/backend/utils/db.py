@@ -9,6 +9,12 @@ db = None
  
 def init_db():
     global client, db
-    client = MongoClient(os.getenv('MONGODB_URI'))
-    db = client.get_database()
-    return db
+    try:
+        client = MongoClient(os.getenv('MONGODB_URI'))
+        db_name = os.getenv('MONGODB_URI').split('/')[-1].split('?')[0]
+        db = client[db_name]
+        print(f"Connected to database: {db_name}")
+        return db
+    except Exception as e:
+        print(f"Database connection failed: {str(e)}")
+        raise

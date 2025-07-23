@@ -1,11 +1,15 @@
 from utils.db import init_db, db
 from models.product import Product
-import os
 import datetime
+import os
 from datetime import datetime, UTC
- 
-# Initialize database without app context
-init_db()
+# Initialize database
+try:
+    init_db()
+    print("Database initialized successfully")
+except Exception as e:
+    print(f"Database initialization failed: {str(e)}")
+    exit(1)
  
 def seed_products():
     sample_products = [
@@ -75,12 +79,13 @@ def seed_products():
         result = Product.get_collection().insert_many(sample_products)
         print(f'Inserted {len(result.inserted_ids)} products')
         
-        # Create indexes
-        Product.create_indexes()
-        print('Indexes created')
-        
+        return True
     except Exception as e:
         print(f'Database seeding failed: {str(e)}')
+        return False
  
 if __name__ == '__main__':
-    seed_products()
+    if seed_products():
+        print("Database seeding completed successfully")
+    else:
+        print("Database seeding failed")
